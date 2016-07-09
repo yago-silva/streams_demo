@@ -2,13 +2,12 @@ package br.com.thedevelopersconference.streams.demo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PerformanceForVsStream {
+public class PerformanceForVsStreamApi {
     public static void main(String[] args) {
         List<Integer> numeros = new ArrayList<>();
         
-        for(int i = 0 ; i < 9000000 ; i++ ){
+        for(int i = 0 ; i < 10 ; i++ ){
             numeros.add(i);
         }
         
@@ -21,6 +20,12 @@ public class PerformanceForVsStream {
         long inicio = System.currentTimeMillis();
         
         for(int n : numeros){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             n = n;
         }
         
@@ -32,7 +37,14 @@ public class PerformanceForVsStream {
         long inicio = System.currentTimeMillis();
         
         numeros.stream()
-                .forEach(n -> {n = n;});
+                .forEach(n -> {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    n = n;});
         
         long fim = System.currentTimeMillis();
         System.out.println("\nUsando Stream: "+ (fim - inicio) + "ms");
@@ -42,7 +54,14 @@ public class PerformanceForVsStream {
         long inicio = System.currentTimeMillis();
         
         numeros.parallelStream()
-            .forEach(n -> {n = n;});
+            .forEach(n -> {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                n = n;});
         
         long fim = System.currentTimeMillis();
         System.out.println("\nUsando Parallel Stream: "+ (fim - inicio) + "ms");
