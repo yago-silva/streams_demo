@@ -25,6 +25,10 @@ public class Participante {
     public boolean ganhouCamisaP() {
         return tamanhoCamisa == TamanhoCamisa.P;
     }
+    
+    public TamanhoCamisa getTamanhoCamisa() {
+        return tamanhoCamisa;
+    }
 
     public void setTamanhoCamisa(TamanhoCamisa tamanhoCamisa) {
         this.tamanhoCamisa = tamanhoCamisa;
