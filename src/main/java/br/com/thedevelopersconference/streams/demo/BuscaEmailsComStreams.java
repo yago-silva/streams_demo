@@ -1,8 +1,6 @@
 package br.com.thedevelopersconference.streams.demo;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class BuscaEmailsComStreams {
@@ -12,27 +10,9 @@ public class BuscaEmailsComStreams {
         List<Participante> participantesTdc = ParticipantesTdc.listaTodos();
         
         List<String> emails = participantesTdc.stream()
-                        .filter(new Predicate<Participante>() {
-
-                            @Override
-                            public boolean test(Participante participant) {
-                                return participant.isInscrito();
-                            }
-                        })
-                        .filter(new Predicate<Participante>() {
-
-                            @Override
-                            public boolean test(Participante participant) {
-                                return participant.ganhouCamisaP();
-                            }
-                        })
-                        .map(new Function<Participante, String>() {
-
-                            @Override
-                            public String apply(Participante participant) {
-                                return participant.getEmail();
-                            }
-                        })
+                        .filter(Participante::isInscrito)
+                        .filter(Participante::ganhouCamisaP)
+                        .map(Participante::getEmail)
                         .limit(2)
                         .collect(Collectors.toList());
         
